@@ -103,12 +103,6 @@ class _BackdropTitle extends AnimatedWidget {
   }
 }
 
-/// Builds a Backdrop.
-///
-/// A Backdrop widget has two panels, front and back. The front panel is shown
-/// by default, and slides down to show the back panel, from which a user
-/// can make a selection. The user can also configure the titles for when the
-/// front or back panel is showing.
 class Backdrop extends StatefulWidget {
   final Category currentCategory;
   final Widget frontPanel;
@@ -140,9 +134,7 @@ class _BackdropState extends State<Backdrop>
   @override
   void initState() {
     super.initState();
-    // This creates an [AnimationController] that can allows for animation for
-    // the BackdropPanel. 0.00 means that the front panel is in "tab" (hidden)
-    // mode, while 1.0 means that the front panel is open.
+
     _controller = AnimationController(
       duration: Duration(milliseconds: 300),
       value: 1.0,

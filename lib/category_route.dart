@@ -79,17 +79,13 @@ class _CategoryRouteState extends State<CategoryRoute> {
   @override
   Future<void> didChangeDependencies() async {
     super.didChangeDependencies();
-    // We have static unit conversions located in our
-    // assets/data/regular_units.json
-    // and we want to also obtain up-to-date Currency conversions from the web
-    // We only want to load our data in once
+ 
     if (_categories.isEmpty) {
       await _retrieveLocalCategories();
       await _retrieveApiCategory();
     }
   }
 
-  /// Retrieves a list of [Categories] and their [Unit]s
   Future<void> _retrieveLocalCategories() async {
 
     final json = DefaultAssetBundle
@@ -159,10 +155,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
     });
   }
 
-  /// Makes the correct number of rows for the list view, based on whether the
-  /// device is portrait or landscape.
-  ///
-  /// For portrait, we use a [ListView]. For landscape, we use a [GridView].
   Widget _buildCategoryWidgets(Orientation deviceOrientation) {
     if (deviceOrientation == Orientation.portrait) {
       return ListView.builder(
@@ -201,8 +193,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
       );
     }
 
-    // Based on the device size, figure out how to best lay out the list
-    // You can also use MediaQuery.of(context).size to calculate the orientation
     assert(debugCheckHasMediaQuery(context));
     final listView = Padding(
       padding: EdgeInsets.only(

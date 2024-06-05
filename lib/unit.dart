@@ -9,8 +9,8 @@ class Unit {
   ///
   /// An example would be 'Meter' and '1.0'.
   const Unit({
-    @required this.name,
-    @required this.conversion,
+    required this.name,
+    required this.conversion,
   })  : assert(name != null),
         assert(conversion != null);
 

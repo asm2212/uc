@@ -17,7 +17,7 @@ class UnitConverter extends StatefulWidget {
 
   /// This [UnitConverter] takes in a [Category] with [Units]. It can't be null.
   const UnitConverter({
-    @required this.category,
+    required this.category,
   }) : assert(category != null);
 
   @override
@@ -70,8 +70,6 @@ class _UnitConverterState extends State<UnitConverter> {
     });
   }
 
-  /// Sets the default values for the 'from' and 'to' [Dropdown]s, and the
-  /// updated output value if a user had previously entered an input.
   void _setDefaults() {
     setState(() {
       _fromValue = widget.category.units[0];
@@ -82,7 +80,6 @@ class _UnitConverterState extends State<UnitConverter> {
     }
   }
 
-  /// Clean up conversion; trim trailing zeros, e.g. 5.500 -> 5.5, 10.0 -> 10
   String _format(double conversion) {
     var outputNum = conversion.toStringAsPrecision(7);
     if (outputNum.contains('.') && outputNum.endsWith('0')) {
@@ -99,8 +96,7 @@ class _UnitConverterState extends State<UnitConverter> {
   }
 
   Future<void> _updateConversion() async {
-    // Our API has a handy convert function, so we can use that for
-    // the Currency [Category]
+   
     if (widget.category.name == 'Currency') {
       final api = Api();
       final conversion = await api.convert('currency',
@@ -129,8 +125,7 @@ class _UnitConverterState extends State<UnitConverter> {
       if (input == null || input.isEmpty) {
         _convertedValue = '';
       } else {
-        // Even though we are using the numerical keyboard, we still have to check
-        // for non-numerical input such as '5..0' or '6 -3'
+    
         try {
           final inputDouble = double.parse(input);
           _showValidationError = false;
@@ -241,9 +236,7 @@ class _UnitConverterState extends State<UnitConverter> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // This is the widget that accepts text input. In this case, it
-          // accepts numbers and calls the onChanged property on update.
-          // You can read more about it here: https://flutter.io/text-input
+ 
           TextField(
             key: _inputKey,
             style: Theme.of(context).textTheme.display1,
@@ -255,8 +248,7 @@ class _UnitConverterState extends State<UnitConverter> {
                 borderRadius: BorderRadius.circular(0.0),
               ),
             ),
-            // Since we only want numerical input, we use a number keyboard. There
-            // are also other keyboards for dates, emails, phone numbers, etc.
+     
             keyboardType: TextInputType.number,
             onChanged: _updateInputValue,
           ),
@@ -304,8 +296,6 @@ class _UnitConverterState extends State<UnitConverter> {
       ],
     );
 
-    // Based on the orientation of the parent widget, figure out how to best
-    // lay out our converter.
     return Padding(
       padding: _padding,
       child: OrientationBuilder(

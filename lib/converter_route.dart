@@ -5,22 +5,17 @@ import 'unit.dart';
 
 const _padding = EdgeInsets.all(16.0);
 
-/// [ConverterRoute] where users can input amounts to convert in one [Unit]
-/// and retrieve the conversion in another [Unit] for a specific [Category].
-///
-/// While it is named ConverterRoute, a more apt name would be ConverterScreen,
-/// because it is responsible for the UI at the route's destination.
 class ConverterRoute extends StatefulWidget {
-  /// Color for this [Category].
+
   final Color color;
 
-  /// Units for this [Category].
+
   final List<Unit> units;
 
-  /// This [ConverterRoute] requires the color and units to not be null.
+  
   const ConverterRoute({
-    @required this.color,
-    @required this.units,
+    required this.color,
+    required this.units,
   })  : assert(color != null),
         assert(units != null);
 
@@ -43,7 +38,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
     _setDefaults();
   }
 
-  /// Clean up conversion; trim trailing zeros, e.g. 5.500 -> 5.5, 10.0 -> 10
+ 
   String _format(double conversion) {
     var outputNum = conversion.toStringAsPrecision(7);
     if (outputNum.contains('.') && outputNum.endsWith('0')) {
